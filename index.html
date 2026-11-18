@@ -1433,6 +1433,27 @@
 
             // --- EXPANDED LOOKUP & REFERENCE ---
             {
+                id: 'iferror_vlookup',
+                name: 'IFERROR(VLOOKUP(...))',
+                category: 'lookup',
+                khmerTitle: 'ស្វែងរកទិន្នន័យជាមួយ VLOOKUP ដោយការពារកុំឱ្យចេញសញ្ញា #N/A',
+                keywords: 'iferror vlookup ស្វែងរក ការពារ #N/A រកមិនឃើញ ទាញទិន្នន័យ',
+                summary: 'រូបមន្តផ្គុំដ៏សំខាន់បំផុតសម្រាប់ការងាររដ្ឋបាល និងគណនេយ្យ៖ ប្រើ VLOOKUP ដើម្បីស្វែងរកទិន្នន័យពីតារាងមួយ ហើយរុំពីខាងក្រៅដោយ IFERROR ដើម្បីបង្ហាញពាក្យថា "រកមិនឃើញ" ឬលេខ 0 ជំនួសឱ្យសញ្ញាកំហុស #N/A នៅពេលលេខកូដដែលស្វែងរកមិនមាននៅក្នុងតារាង។',
+                syntax: '=IFERROR(VLOOKUP(lookup_value, table_array, col_index_num, FALSE), value_if_error)',
+                args: [
+                    { name: 'lookup_value', desc: 'លេខកូដ អត្តលេខ ឬឈ្មោះដែលចង់ស្វែងរក (ឧ. A2)។' },
+                    { name: 'table_array', desc: 'តារាងទិន្នន័យទាំងមូលដែលត្រូវស្វែងរក (ត្រូវចាក់សោដាច់ខាត $D$2:$G$50 ដោយចុច F4)។' },
+                    { name: 'col_index_num', desc: 'លេខរៀងជួរឈរនៃទិន្នន័យដែលចង់ទាញយក (រាប់ពីឆ្វេងទៅស្តាំ 1, 2, 3...)។' },
+                    { name: 'FALSE', desc: 'កំណត់ឱ្យស្វែងរកត្រូវគ្នា 100% (Exact Match)។' },
+                    { name: 'value_if_error', desc: 'សារ ឬតម្លៃដែលត្រូវបង្ហាញពេលរកមិនឃើញ #N/A (ឧ. "គ្មានទិន្នន័យ", 0, ឬ "")។' }
+                ],
+                example: {
+                    scenario: 'ទាញឈ្មោះសិស្ស ឬឈ្មោះទំនិញតាមលេខកូដ A2 ពីតារាង $D$2:$F$50 ហើយបើរកមិនឃើញឱ្យចេញពាក្យ "គ្មានលេខកូដនេះ"',
+                    formula: '=IFERROR(VLOOKUP(A2, $D$2:$F$50, 2, FALSE), "គ្មានលេខកូដនេះ")',
+                    result: '"គ្មានលេខកូដនេះ" (ជំនួសឱ្យសញ្ញា #N/A)'
+                }
+            },
+            {
                 id: 'xmatch',
                 name: 'XMATCH',
                 category: 'lookup',
@@ -2360,7 +2381,7 @@
             if (!q) {
                 // Show popular & essential formulas immediately upon clicking Search
                 headerEl.innerHTML = `<i class="fa-solid fa-fire text-amber-500 mr-1"></i> រូបមន្តពេញនិយម និងប្រើញឹកញាប់ (ចុចជ្រើសរើស ឬវាយអក្សរដើម្បីស្វែងរក)`;
-                const popularIds = ['sum', 'sumifs', 'sg_rank', 'sg_mention_if', 'sg_countifs_female', 'average', 'countif', 'round', 'switch', 'unique_sort_sortby'];
+                const popularIds = ['iferror_vlookup', 'sum', 'sumifs', 'sg_rank', 'sg_mention_if', 'sg_countifs_female', 'average', 'countif', 'round', 'switch'];
                 results = popularIds
                     .map(id => FORMULAS_DB.find(f => f.id === id))
                     .filter(Boolean)
